@@ -1,7 +1,10 @@
 import argparse
 import sys, os
 import time
+import yaml
+import signal
 from tcp_utils import ImgServer, ImgClient
+from jetson_utils.runner import jetson_main
         
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -18,28 +21,34 @@ def get_parser():
     opt = parser.parse_args()
     return opt
  
-def main(opt):
+def main(opt, hyp):
     if opt.qt:
         from PySide6.QtWidgets import QApplication
         from qtWidgets.SingleCamWidget import SingleCamWidget
-        server_sokect = ImgServer(opt.host, opt.port, protcol='ipv4', type='tcp')
+        server_ = ImgServer(opt.host, opt.port, protcol='ipv4', type='tcp')
+        signal.signal(signal.SIGINT, signal.SIG_DFL)
         app = QApplication(sys.argv)
         try:
-            w = SingleCamWidget(server_sokect=server_sokect)
+            w = SingleCamWidget(server=server_)
             w.setWindowTitle("PySide Layout on QMainWindow")
             w.resize(opt.width, opt.height)
             w.show()
-            sys.exit(app.exec_())
+            app.exec_()
         except KeyboardInterrupt:
             app.shutdown()
-    elif opt.usb or opt.csi or opt.dual:
-        from jetson_utils.runner import jetson_main
-        with open(opt.hyp, errors='ignore') as f:
-            hyp = yaml.safe_load(f)  # load hyps dict
+        sys.exit()
+    elif opt.usb:
         client_ = ImgClient(opt.host, opt.port, protcol='ipv4', type='tcp')
         jetson_main(opt, client_)
+    elif opt.csi:
+        client_ = ImgClient(opt.host, opt.port, protcol='ipv4', type='tcp')
+        jetson_main(opt, client_, hyp)
+    #elif opt.dual:
         
 if __name__ == '__main__':
     opt = get_parser()
-    main(opt)
+    # load hyps dict
+    with open(opt.hyp, errors='ignore') as f:
+        hyp = yaml.safe_load(f)
+    main(opt, hyp)
 

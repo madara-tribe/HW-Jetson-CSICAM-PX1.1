@@ -22,11 +22,11 @@ def run_camera(opt, client):
     cap.release()
     cv2.destroyAllWindows()
  
-def jetson_main(opt, client):
+def jetson_main(opt, client, hyp=None):
     if opt.usb:
     	run_camera(opt, client)
     elif opt.csi:
-        run_csicam(opt, client)
+        run_csicam(opt, client, hyp)
     #elif opt.csi:
         #run_dual_csi(opt, client_sokect)
 

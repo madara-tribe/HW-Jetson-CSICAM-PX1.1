@@ -2,14 +2,7 @@ import sys
 import cv2
 
 # GStreamer pipeline
-def gstreamer_pipeline(
-    capture_width=1280,
-    capture_height=720,
-    display_width=1280,
-    display_height=720,
-    framerate=60,
-    flip_method=0,
-):
+def gstreamer_pipeline(hyp):
     return (
         "nvarguscamerasrc ! "
         "video/x-raw(memory:NVMM), "
@@ -20,17 +13,17 @@ def gstreamer_pipeline(
         "videoconvert ! "
         "video/x-raw, format=(string)BGR ! appsink"
         % (
-            capture_width,
-            capture_height,
-            framerate,
-            flip_method,
-            display_width,
-            display_height,
+            hyp['capture_width'],
+            hyp['capture_height'],
+            hyp['framerate'],
+            hyp['flip_method'],
+            hyp['display_width'],
+            hyp['display_height'],
         )
     )
 
-def run_csicam(opt, client):
-    cap = cv2.VideoCapture(gstreamer_pipeline(display_width=640, display_height=360), cv2.CAP_GSTREAMER)
+def run_csicam(opt, client, hyp):
+    cap = cv2.VideoCapture(gstreamer_pipeline(hyp), cv2.CAP_GSTREAMER)
     if not cap.isOpened():
         print('Can not open camera.')
         sys.exit()
