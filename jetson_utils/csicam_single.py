@@ -29,18 +29,20 @@ def gstreamer_pipeline(
         )
     )
 
-cap = cv2.VideoCapture(gstreamer_pipeline(display_width=640, display_height=360), cv2.CAP_GSTREAMER)
-if not cap.isOpened():
-    print('Can not open camera.')
-    sys.exit()
+def run_csicam(opt, client):
+    cap = cv2.VideoCapture(gstreamer_pipeline(display_width=640, display_height=360), cv2.CAP_GSTREAMER)
+    if not cap.isOpened():
+        print('Can not open camera.')
+        sys.exit()
 
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
-    cv2.imshow('Viewer', frame)
-    if cv2.waitKey(30) == 27:
-        break
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        #cv2.imshow('Viewer', frame)
+        client.send(frame)
+        if cv2.waitKey(30) == 27:
+            break
 
-cv2.destroyAllWindows()
-cap.release()
+    cv2.destroyAllWindows()
+    cap.release()
