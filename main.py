@@ -44,7 +44,7 @@ def main(opt, hyp):
             jetson_main(opt, client_, hyp, plot=True)
         else:
             client_ = ImgClient(opt.host, opt.port, protcol='ipv4', type='tcp')
-        jetson_main(opt, client_, hyp , plot=None)
+            jetson_main(opt, client_, hyp , plot=None)
         
 if __name__ == '__main__':
     opt = get_parser()
