@@ -1,5 +1,6 @@
 import sys, os
 from jetson_utils.csicam_single import run_csicam #, run_dual_csi
+from jetson_utils.csicam_dual import run_dual_csicam
 import cv2
         
 def run_camera(opt, client):
@@ -22,12 +23,12 @@ def run_camera(opt, client):
     cap.release()
     cv2.destroyAllWindows()
  
-def jetson_main(opt, client, hyp=None):
+def jetson_main(opt, client, hyp=None, plot=None):
     if opt.usb:
     	run_camera(opt, client)
     elif opt.csi:
-        run_csicam(opt, client, hyp)
-    #elif opt.csi:
-        #run_dual_csi(opt, client_sokect)
+        run_csicam(hyp, client=client, plot=plot)
+    elif opt.dual:
+        run_dual_csicam(hyp, client=client, plot=plot)
 
 
