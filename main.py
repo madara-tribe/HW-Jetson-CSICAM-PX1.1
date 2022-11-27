@@ -22,22 +22,25 @@ def get_parser():
     opt = parser.parse_args()
     return opt
  
+def run_pyside_gui(opt):
+    from PySide6.QtWidgets import QApplication
+    from qtWidgets.SingleCamWidget import SingleCamWidget
+    server_ = ImgServer(opt.host, opt.port, protcol='ipv4', type='tcp')
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    app = QApplication(sys.argv)
+    try:
+        w = SingleCamWidget(server=server_)
+        w.setWindowTitle("PySide Layout on QMainWindow")
+        w.resize(opt.width, opt.height)
+        w.show()
+        app.exec_()
+    except KeyboardInterrupt:
+        app.shutdown()
+    sys.exit()
+    
 def main(opt, hyp):
     if opt.qt:
-        from PySide6.QtWidgets import QApplication
-        from qtWidgets.SingleCamWidget import SingleCamWidget
-        server_ = ImgServer(opt.host, opt.port, protcol='ipv4', type='tcp')
-        signal.signal(signal.SIGINT, signal.SIG_DFL)
-        app = QApplication(sys.argv)
-        try:
-            w = SingleCamWidget(server=server_)
-            w.setWindowTitle("PySide Layout on QMainWindow")
-            w.resize(opt.width, opt.height)
-            w.show()
-            app.exec_()
-        except KeyboardInterrupt:
-            app.shutdown()
-        sys.exit()
+        run_pyside_gui(opt)
     elif opt.usb or opt.csi or opt.dual:
         if opt.plot:
             client_ = None
