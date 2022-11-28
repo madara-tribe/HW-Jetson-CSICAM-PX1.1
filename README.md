@@ -32,7 +32,7 @@ $ python3 main.py --qt --port <optional port>
 
 add option [--plot].
 ```
-$ python3 main.py --usb --plot --port <optional port>
+$ python3 main.py --usb --plot
 ```
 
 # Put into Action (dual CSI camera case)
