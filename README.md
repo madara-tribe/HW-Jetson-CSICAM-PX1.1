@@ -13,25 +13,25 @@ It plot iage and calcurate how much it take time
 <b>jetson side</b>
 ```sh
 # Use USB camera
-$ python3 main.py --usb -- port <optional port> 
+$ python3 main.py --usb --port <optional port> 
 
 # Use single CSI camera
-$ python3 main.py --csi -- port <optional port> 
+$ python3 main.py --csi --port <optional port> 
 
 # Use dual CSI camera
-$ python3 main.py --dual -- port <optional port> 
+$ python3 main.py --dual --port <optional port> 
 ```
 
 <b>the other side</b>
 ```sh
-$ python3 main.py --qt -- port <optional port> 
+$ python3 main.py --qt --port <optional port> 
 ```
 
 ## If only camera plot on GUI (No TCP)
 
 add option [--plot] and rename "qtWidgets/VideoTread.py" fuction name.
 ```
-$ python3 main.py --usb --plot -- port <optional port> <code>
+$ python3 main.py --usb --plot --port <optional port> <code>
 ```
 
 
