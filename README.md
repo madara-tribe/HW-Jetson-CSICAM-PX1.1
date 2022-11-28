@@ -41,3 +41,4 @@ $ python3 main.py --usb --plot
 
 # References
 - [OpenCV Face Detection Example](https://doc.qt.io/qtforpython/examples/example_external__opencv.html)
+- [JetsonHacksNano/CSI-Camera](https://github.com/JetsonHacksNano/CSI-Camera)
