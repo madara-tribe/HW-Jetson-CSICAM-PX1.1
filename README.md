@@ -4,6 +4,7 @@ It trasmit image from jetson to other PC (such as Mac) and plot GUI(Pyside).
 
 It plot iage and calcurate how much it take time
 
+・<b>CSI camera type</b> is 「SainSmart IMX219」
 
 
 # How to use
