@@ -5,4 +5,5 @@ mkdir -p bp bp/jetson_utils bp/qtWidgets bp/csicam_utils
 cp *.py *.sh bp/
 cp qtWidgets/*.py bp/qtWidgets/
 cp jetson_utils/*.py bp/jetson_utils/
+cp jetson_utils/*.cpp bp/jetson_utils/
 cp csicam_utils/* bp/csicam_utils/
