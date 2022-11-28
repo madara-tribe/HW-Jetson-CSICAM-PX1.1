@@ -35,6 +35,7 @@ add option [--plot] and rename "qtWidgets/VideoTread.py" fuction name.
 $ python3 main.py --usb --plot --port <optional port> <code>
 ```
 
+# Put into Action (dual CSI camera case)
 
 
 
