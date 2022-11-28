@@ -17,8 +17,9 @@ def cv2_video_writer(w=dispW, h=dispH):
 
 class Thread(QThread):
     updateFrame = Signal(QImage)
-    def __init__(self, parent=None, vid_size=None, server=None):
+    def __init__(self, parent=None, vid_size=None, server=None, opt=None):
         QThread.__init__(self, parent)
+        self.opt = opt
         self.cap = cv2.VideoCapture(0)
         self.pred_time = 0
         self.vid_side = vid_size
@@ -28,7 +29,10 @@ class Thread(QThread):
         self.server_sokect = self.server.accept_socket()
         
     def openCV2Qimage(self, cvImage):
-        cvImage = cv2.resize(cvImage, (self.vid_side, self.vid_side))
+        if self.opt.dual:
+            cvImage = cv2.resize(cvImage, (self.vid_side*2, self.vid_side))
+        else:
+            cvImage = cv2.resize(cvImage, (self.vid_side, self.vid_side))
         height, width, channel = cvImage.shape
         bytesPerLine = channel * width
         cvImageRGB = cv2.cvtColor(cvImage, cv2.COLOR_BGR2RGB)

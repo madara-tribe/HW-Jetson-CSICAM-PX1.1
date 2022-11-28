@@ -29,7 +29,7 @@ def run_pyside_gui(opt):
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
     try:
-        w = SingleCamWidget(server=server_)
+        w = SingleCamWidget(server=server_, opt=opt)
         w.setWindowTitle("PySide Layout on QMainWindow")
         w.resize(opt.width, opt.height)
         w.show()

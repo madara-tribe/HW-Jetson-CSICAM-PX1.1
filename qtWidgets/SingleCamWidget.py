@@ -9,17 +9,18 @@ from PySide6.QtWidgets import (QHBoxLayout, QLabel, QPushButton, QVBoxLayout, QW
 from qtWidgets.VideoTread import Thread
 
 class SingleCamWidget(QWidget):
-    def __init__(self, server, parent=None):
+    def __init__(self, server, opt, parent=None):
         super().__init__(parent)
         self.parent = parent
         self.server = server
+        self.opt = opt
         self.vid_size = 256
         self.setup_ui()
-        self.set_thread(vid_size = self.vid_size, server=self.server)
+        self.set_thread(vid_size = self.vid_size, server=self.server, opt=self.opt)
         self.predictbar.setText('Now Loading')
         
-    def set_thread(self, vid_size, server):
-        self.th = Thread(self, vid_size=vid_size, server=server)
+    def set_thread(self, vid_size, server, opt):
+        self.th = Thread(self, vid_size=vid_size, server=server, opt=opt)
         self.th.updateFrame.connect(self.setImage)
         self.th.updateFrame.connect(self.plot_fps)
         
