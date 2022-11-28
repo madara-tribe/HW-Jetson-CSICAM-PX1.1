@@ -6,6 +6,7 @@ It plot iage and calcurate how much it take time
 
 ・<b>CSI camera type</b> is 「SainSmart IMX219」
 
+<img width="664" alt="TCP" src="https://user-images.githubusercontent.com/48679574/204338150-34151466-100f-40da-9301-4bde6fe908a9.png">
 
 # How to use
 
