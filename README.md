@@ -1,8 +1,8 @@
-# TCP ImageCompression from Jetson CSI or USB camera to Pyside(GUI)
+# TCP ImageCompression from Jetson CSI or USB camera to on GUI(Pyside).
 
-It trasmit image from jetson to other PC (such as Mac) and plot GUI(Pyside).
+It trasmit image from jetson to other PC (such as Mac) and plot on GUI(Pyside).
 
-It plot iage and calcurate how much it take time
+It plot image and calcurate how much it take time
 
 ・<b>CSI camera type</b> is 「SainSmart IMX219」
 
@@ -10,7 +10,7 @@ It plot iage and calcurate how much it take time
 
 # How to use
 
-## TCP Fast Retransmission and camera plot on GUI
+## TCP and camera plot on GUI
 <b>jetson side</b>
 ```sh
 # Use USB camera
@@ -28,11 +28,11 @@ $ python3 main.py --dual --port <optional port>
 $ python3 main.py --qt --port <optional port> 
 ```
 
-## If only camera plot on GUI (No TCP)
+## If only camera plot (No TCP)
 
-add option [--plot] and rename "qtWidgets/VideoTread.py" fuction name.
+add option [--plot].
 ```
-$ python3 main.py --usb --plot --port <optional port> <code>
+$ python3 main.py --usb --plot --port <optional port>
 ```
 
 # Put into Action (dual CSI camera case)
