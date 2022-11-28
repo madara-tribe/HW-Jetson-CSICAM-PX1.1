@@ -26,9 +26,9 @@ $ python3 main.py --dual -- port <optional port>
 $ python3 main.py --qt -- port <optional port> 
 ```
 
-## If only camera plot on GUI (NO TCP)
+## If only camera plot on GUI (No TCP)
 
-add option [--plot]. 
+add option [--plot] and rename "qtWidgets/VideoTread.py" fuction name.
 ```
 $ python3 main.py --usb --plot -- port <optional port> <code>
 ```
