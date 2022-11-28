@@ -10,7 +10,7 @@ It plot image and calcurate how much it take time
 
 # How to use
 
-## TCP and camera plot on GUI
+## TCP ImageCompression and camera plot on GUI
 <b>jetson side</b>
 ```sh
 # Use USB camera
