@@ -34,7 +34,7 @@ $ python3 main.py --qt --dual --port <optional port>
 
 ## If only camera plot (No TCP)
 
-add option [--plot].
+<b>On jetson side</b>, add option [--plot].
 ```
 $ python3 main.py --usb --plot
 ```
