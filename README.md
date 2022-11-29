@@ -1,10 +1,10 @@
-# TCP ImageCompression from Jetson CSI or USB camera to on GUI(Pyside).
+# TCP ImageCompression from Jetson CSI or USB camera to on GUI(Pyside)
 
-It trasmit image from jetson to other PC (such as Mac) and plot on GUI(Pyside).
+It trasmit image from jetson to other PC (such as Mac) and plot on GUI(Pyside) through cameras.
 
-It plot image and calcurate how much it take time
+It plot image and calcurate how much it take time.
 
-・<b>CSI camera type</b> is 「SainSmart IMX219」
+・Camera example: <b>CSI camera type</b> 「SainSmart IMX219」
 
 <img width="664" alt="TCP" src="https://user-images.githubusercontent.com/48679574/204338150-34151466-100f-40da-9301-4bde6fe908a9.png">
 
