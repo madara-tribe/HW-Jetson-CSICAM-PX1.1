@@ -41,6 +41,8 @@ $ python3 main.py --usb --plot
 
 # Put into Action (dual CSI camera case)
 
+<img src="https://user-images.githubusercontent.com/48679574/204505791-ade5d101-ea42-4c06-b8c3-145b972bd735.gif" width="600px">
+
 
 
 # References
