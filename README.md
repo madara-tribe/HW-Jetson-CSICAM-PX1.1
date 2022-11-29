@@ -25,7 +25,11 @@ $ python3 main.py --dual --port <optional port>
 
 <b>the other side</b>
 ```sh
+# Use single camera
 $ python3 main.py --qt --port <optional port> 
+
+# Use dual camera
+$ python3 main.py --qt --dual --port <optional port>
 ```
 
 ## If only camera plot (No TCP)
