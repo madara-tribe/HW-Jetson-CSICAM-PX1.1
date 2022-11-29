@@ -14,7 +14,7 @@ def get_parser():
     parser.add_argument('--dual', action='store_true', help='use 2 CSI cameras')
     parser.add_argument('--plot', action='store_true', help='just plot and not TCP socket trasmission to pyside')
     parser.add_argument('--hyp', type=str, default='csicam_utils/hyp.csi.imx219.yaml', help='CSI IMX219 hyperparameters path')
-    parser.add_argument('--height', type=int, default=640, help='height of movie')
+    parser.add_argument('--height', type=int, default=840, help='height of movie')
     parser.add_argument('--width', type=int, default=840, help='width of of movie')
     parser.add_argument('--host', type=str, default='192.168.10.107', help='host url')
     parser.add_argument('--port', type=int, default=7000, help='port number')

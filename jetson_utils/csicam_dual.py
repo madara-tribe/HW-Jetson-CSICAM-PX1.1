@@ -2,6 +2,14 @@ import cv2
 import threading
 import numpy as np
 
+def cv2_video_writer(w, h, filename='output.mov'):
+    # camera init
+    fps = 10 # int(cap.get(cv2.CAP_PR
+    fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+    vid_writer = cv2.VideoWriter(filename, fourcc, fps, (w, h))
+    return vid_writer
+
+
 
 class CSI_Camera:
 
@@ -92,7 +100,11 @@ def gstreamer_pipeline(sensor_id, hyp):
 
 
 def run_dual_csicam(hyp, client=None, plot=None):
-    
+    #W=1280
+    #H=720
+    #rvid = cv2_video_writer(W, H, filename='right.mp4')
+    #lvid = cv2_video_writer(W, H, filename='left.mp4')
+
     window_title = "Dual CSI Cameras"
     left_camera = CSI_Camera()
     left_camera.open(gstreamer_pipeline(sensor_id=0, hyp=hyp))
@@ -107,20 +119,21 @@ def run_dual_csicam(hyp, client=None, plot=None):
         cv2.namedWindow(window_title, cv2.WINDOW_AUTOSIZE)
 
         while True:
-                left_image, right_image = left_camera.read()[1], right_camera.read()[1]
-                # Use numpy to place images next to each other
-                frames = np.hstack((left_image, right_image))
-                if cv2.getWindowProperty(window_title, cv2.WND_PROP_AUTOSIZE) >= 0:
-                    if plot:
-                        cv2.imshow(window_title, frames)
-                    else:
-                        client.send(frames)
-                else:
-                    break
-
+            left_image, right_image = left_camera.read()[1], right_camera.read()[1]
+                               
+            # Use numpy to place images next to each other
+            frames = np.hstack((left_image, right_image))
+            if plot:
+                cv2.imshow(window_title, frames)
+                #limg = cv2.resize(left_image, (W, H))
+                #lvid.write(limg.astype(np.uint8))
+                #rimg = cv2.resize(right_image, (W, H))
+                #rvid.write(rimg.astype(np.uint8))
+            else:
+                client.send(frames)
                 # Stop the program on the ESC key
-                if cv2.waitKey(30) == 27:
-                    break
+            if cv2.waitKey(30) == 27:
+                break
         left_camera.stop()
         right_camera.stop()
         cv2.destroyAllWindows()

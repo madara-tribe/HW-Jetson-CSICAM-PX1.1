@@ -90,5 +90,3 @@ class Thread(QThread):
                 self.vid_writer.write(im_rgb.astype(np.uint8))
         sys.exit(-1)
         
-        
-    

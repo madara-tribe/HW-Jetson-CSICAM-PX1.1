@@ -14,7 +14,7 @@ class SingleCamWidget(QWidget):
         self.parent = parent
         self.server = server
         self.opt = opt
-        self.vid_size = 256
+        self.vid_size = 300
         self.setup_ui()
         self.set_thread(vid_size = self.vid_size, server=self.server, opt=self.opt)
         self.predictbar.setText('Now Loading')
@@ -46,7 +46,7 @@ class SingleCamWidget(QWidget):
         
         # video widget
         self.video_display = QLabel()
-        self.video_display.setFixedSize(QSize(self.vid_size*2, self.vid_size))
+        self.video_display.setFixedSize(QSize(self.vid_size*2, self.vid_size*2))
         
     def set2_main_layout(self):
         self.main_layout = QVBoxLayout()
