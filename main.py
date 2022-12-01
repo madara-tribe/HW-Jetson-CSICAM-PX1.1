@@ -16,7 +16,7 @@ def get_parser():
     parser.add_argument('--hyp', type=str, default='csicam_utils/hyp.csi.imx219.yaml', help='CSI IMX219 hyperparameters path')
     parser.add_argument('--height', type=int, default=840, help='height of movie')
     parser.add_argument('--width', type=int, default=840, help='width of of movie')
-    parser.add_argument('--host', type=str, default='192.168.10.107', help='host url')
+    parser.add_argument('--host', type=str, default='*************', help='host url')
     parser.add_argument('--port', type=int, default=7000, help='port number')
     parser.add_argument('--video_path', type=str, default=None, help='video_path')
     opt = parser.parse_args()
