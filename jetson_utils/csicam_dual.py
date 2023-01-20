@@ -29,6 +29,7 @@ class CSI_Camera:
         self.video_capture = cv2.VideoCapture(
             gstreamer_pipeline_string, cv2.CAP_GSTREAMER
         )
+        self.video_capture.set(cv2.CAP_PROP_FPS, 20)
         # Grab the first frame to start the video capturing
         self.grabbed, self.frame = self.video_capture.read()
 
@@ -100,8 +101,8 @@ def gstreamer_pipeline(sensor_id, hyp):
 
 
 def run_dual_csicam(hyp, client=None, plot=None):
-    #W=1280
-    #H=720
+    W=320 #1280
+    H=180 # 720
     #rvid = cv2_video_writer(W, H, filename='right.mp4')
     #lvid = cv2_video_writer(W, H, filename='left.mp4')
 
@@ -120,7 +121,8 @@ def run_dual_csicam(hyp, client=None, plot=None):
 
         while True:
             left_image, right_image = left_camera.read()[1], right_camera.read()[1]
-                               
+            left_image = cv2.resize(left_image, (W, H))   
+            right_image = cv2.resize(right_image, (W, H))
             # Use numpy to place images next to each other
             frames = np.hstack((left_image, right_image))
             if plot:
