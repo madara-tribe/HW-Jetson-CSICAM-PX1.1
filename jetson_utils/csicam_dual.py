@@ -14,13 +14,9 @@ def cv2_video_writer(w, h, filename='output.mov'):
 class CSI_Camera:
 
     def __init__(self):
-        # Initialize instance variables
-        # OpenCV video capture element
         self.video_capture = None
-        # The last captured image from the camera
         self.frame = None
         self.grabbed = False
-        # The thread where the video capture runs
         self.read_thread = None
         self.read_lock = threading.Lock()
         self.running = False
