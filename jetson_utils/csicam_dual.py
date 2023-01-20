@@ -103,8 +103,8 @@ def gstreamer_pipeline(sensor_id, hyp):
 def run_dual_csicam(hyp, client=None, plot=None):
     W=320 #1280
     H=180 # 720
-    #rvid = cv2_video_writer(W, H, filename='right.mp4')
-    #lvid = cv2_video_writer(W, H, filename='left.mp4')
+    rvid = cv2_video_writer(W, H, filename='right.mp4')
+    lvid = cv2_video_writer(W, H, filename='left.mp4')
 
     window_title = "Dual CSI Cameras"
     left_camera = CSI_Camera()
@@ -121,16 +121,16 @@ def run_dual_csicam(hyp, client=None, plot=None):
 
         while True:
             left_image, right_image = left_camera.read()[1], right_camera.read()[1]
-            left_image = cv2.resize(left_image, (W, H))   
-            right_image = cv2.resize(right_image, (W, H))
+            #left_image = cv2.resize(left_image, (W, H))   
+            #right_image = cv2.resize(right_image, (W, H))
             # Use numpy to place images next to each other
             frames = np.hstack((left_image, right_image))
             if plot:
-                cv2.imshow(window_title, frames)
-                #limg = cv2.resize(left_image, (W, H))
-                #lvid.write(limg.astype(np.uint8))
-                #rimg = cv2.resize(right_image, (W, H))
-                #rvid.write(rimg.astype(np.uint8))
+                #cv2.imshow(window_title, frames)
+                limg = cv2.resize(left_image, (W, H))
+                lvid.write(limg.astype(np.uint8))
+                rimg = cv2.resize(right_image, (W, H))
+                rvid.write(rimg.astype(np.uint8))
             else:
                 client.send(frames)
                 # Stop the program on the ESC key
