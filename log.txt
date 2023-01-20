@@ -1,8 +1,0 @@
-CONSUMER: Producer has connected; continuing.
-[ WARN:0] global /home/nvidia/host/build_opencv/nv_opencv/modules/videoio/src/cap_gstreamer.cpp (1757) handleMessage OpenCV | GStreamer warning: Embedded video playback halted; module nvarguscamerasrc1 reported: Internal data stream error.
-GST_ARGUS: Cleaning up
-CONSUMER: Done Success
-GST_ARGUS: Done Success
-[ WARN:0] global /home/nvidia/host/build_opencv/nv_opencv/modules/videoio/src/cap_gstreamer.cpp (515) startPipeline OpenCV | GStreamer warning: unable to start pipeline
-^CException ignored in: <module 'threading' from '/usr/lib/python3.6/threading.py'>
-Trac
