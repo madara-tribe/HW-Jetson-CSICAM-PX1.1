@@ -1,7 +1,8 @@
 import sys, os
-from jetson_utils.csicam_single import run_csicam #, run_dual_csi
-from jetson_utils.csicam_dual import run_dual_csicam
 import cv2
+
+from jetson_utils.csicam_single import run_csicam
+from jetson_utils.dual_camera import run_cameras
         
 def run_camera(opt, client):
     H, W = opt.height, opt.width
@@ -29,6 +30,6 @@ def jetson_main(opt, client, hyp=None, plot=None):
     elif opt.csi:
         run_csicam(hyp, client=client, plot=plot)
     elif opt.dual:
-        os.system("python3 jetson_utils/dual_camera.py")#run_dual_csicam(hyp, client=client, plot=plot)
+        run_cameras(opt)
 
 

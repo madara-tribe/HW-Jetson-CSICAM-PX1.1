@@ -4,7 +4,7 @@ import time
 import yaml
 import signal
 from tcp_utils import ImgServer, ImgClient
-from jetson_utils.runner import jetson_main
+from jetson_utils.main import jetson_main
         
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -13,6 +13,7 @@ def get_parser():
     parser.add_argument('--csi', action='store_true', help='use 1 CSI camera: imx219 with v4l2 driver(example)')
     parser.add_argument('--dual', action='store_true', help='use 2 CSI cameras')
     parser.add_argument('--plot', action='store_true', help='just plot and not TCP socket trasmission to pyside')
+    parser.add_argument('--mov', action='store_true', help='save 2 CSI camera frames was movie')
     parser.add_argument('--hyp', type=str, default='csicam_utils/hyp.csi.imx219.yaml', help='CSI IMX219 hyperparameters path')
     parser.add_argument('--height', type=int, default=840, help='height of movie')
     parser.add_argument('--width', type=int, default=840, help='width of of movie')

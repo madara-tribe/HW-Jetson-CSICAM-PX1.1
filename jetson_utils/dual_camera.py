@@ -1,20 +1,7 @@
-# MIT License
-# Copyright (c) 2019-2022 JetsonHacks
-
-# A simple code snippet
-# Using two  CSI cameras (such as the Raspberry Pi Version 2) connected to a
-# NVIDIA Jetson Nano Developer Kit with two CSI ports (Jetson Nano, Jetson Xavier NX) via OpenCV
-# Drivers for the camera and OpenCV are included in the base image in JetPack 4.3+
-
-# This script will open a window and place the camera stream from each camera in a window
-# arranged horizontally.
-# The camera streams are each read in their own thread, as when done sequentially there
-# is a noticeable lag
-
 import cv2
 import threading
 import numpy as np
-
+from .tools import cv2_video_writer, H, W
 
 class CSI_Camera:
 
@@ -125,8 +112,11 @@ def gstreamer_pipeline(
     )
 
 
-def run_cameras():
+def run_cameras(opt):
     window_title = "Dual CSI Cameras"
+    if opt.mov:
+        rvid = cv2_video_writer(W, H, filename='right.mp4')
+        lvid = cv2_video_writer(W, H, filename='left.mp4')
     left_camera = CSI_Camera()
     left_camera.open(
         gstreamer_pipeline(
@@ -167,7 +157,14 @@ def run_cameras():
                 # Under GTK+ (Jetson Default), WND_PROP_VISIBLE does not work correctly. Under Qt it does
                 # GTK - Substitute WND_PROP_AUTOSIZE to detect if window has been closed by user
                 if cv2.getWindowProperty(window_title, cv2.WND_PROP_AUTOSIZE) >= 0:
-                    cv2.imshow(window_title, camera_images)
+                    if opt.mov:
+                        print("movie saving now")
+                        limg = cv2.resize(left_image, (W, H))
+                        lvid.write(limg.astype(np.uint8))
+                        rimg = cv2.resize(right_image, (W, H))
+                        rvid.write(rimg.astype(np.uint8))
+                    elif opt.plot:
+                        cv2.imshow(window_title, camera_images)
                 else:
                     break
 
@@ -189,8 +186,3 @@ def run_cameras():
         left_camera.release()
         right_camera.stop()
         right_camera.release()
-
-
-
-if __name__ == "__main__":
-    run_cameras()
