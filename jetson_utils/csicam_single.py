@@ -22,7 +22,7 @@ def gstreamer_pipeline(hyp):
         )
     )
 
-def run_csicam(hyp, client=None, plot=None):
+def run_csicam(hyp, plot=True):
     cap = cv2.VideoCapture(gstreamer_pipeline(hyp), cv2.CAP_GSTREAMER)
     if not cap.isOpened():
         print('Can not open camera.')
@@ -32,8 +32,6 @@ def run_csicam(hyp, client=None, plot=None):
         ret, frame = cap.read()
         if plot:
             cv2.imshow('Viewer', frame)
-        else:
-            client.send(frame)
         if cv2.waitKey(30) == 27:
             break
 

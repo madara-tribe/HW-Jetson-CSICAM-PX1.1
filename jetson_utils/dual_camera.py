@@ -1,8 +1,15 @@
 import cv2
 import threading
 import numpy as np
-from .tools import cv2_video_writer, H, W
 
+def cv2_video_writer(w, h, filename='output.mov'):
+    # camera init
+    fps = 10 # int(cap.get(cv2.CAP_PR
+    fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+    vid_writer = cv2.VideoWriter(filename, fourcc, fps, (w, h))
+    return vid_writer
+    
+    
 class CSI_Camera:
 
     def __init__(self):
@@ -112,8 +119,10 @@ def gstreamer_pipeline(
     )
 
 
-def run_cameras(opt):
+def run_dual_cam(opt, hyp):
     window_title = "Dual CSI Cameras"
+    W = hyp['capture_width']
+    H = hyp['capture_height']
     if opt.mov:
         rvid = cv2_video_writer(W, H, filename='right.mp4')
         lvid = cv2_video_writer(W, H, filename='left.mp4')
@@ -121,11 +130,11 @@ def run_cameras(opt):
     left_camera.open(
         gstreamer_pipeline(
             sensor_id=0,
-            capture_width=1920,
-            capture_height=1080,
+            capture_width=hyp['capture_width'],
+            capture_height=hyp['capture_height'],
             flip_method=0,
-            display_width=960,
-            display_height=540,
+            display_width=hyp['display_width'],
+            display_height=hyp['display_height'],
         )
     )
     left_camera.start()
@@ -134,11 +143,11 @@ def run_cameras(opt):
     right_camera.open(
         gstreamer_pipeline(
             sensor_id=1,
-            capture_width=1920,
-            capture_height=1080,
+            capture_width=hyp['capture_width'],
+            capture_height=hyp['capture_height'],
             flip_method=0,
-            display_width=960,
-            display_height=540,
+            display_width=hyp['display_width'],
+            display_height=hyp['display_height'],
         )
     )
     right_camera.start()
@@ -159,10 +168,12 @@ def run_cameras(opt):
                 if cv2.getWindowProperty(window_title, cv2.WND_PROP_AUTOSIZE) >= 0:
                     if opt.mov:
                         print("movie saving now")
+                        print("original", left_image.shape, right_image.shape)
                         limg = cv2.resize(left_image, (W, H))
-                        lvid.write(limg.astype(np.uint8))
+                        lvid.write(limg) #.astype(np.float32))
                         rimg = cv2.resize(right_image, (W, H))
-                        rvid.write(rimg.astype(np.uint8))
+                        rvid.write(rimg) #.astype(np.float32))
+                        print("resize", limg.shape, rimg.shape)
                     elif opt.plot:
                         cv2.imshow(window_title, camera_images)
                 else:
