@@ -8,7 +8,8 @@ It fix csicamera as dual one and plot more horizontaly.
 
 it became more easy to modify its accuracy and calibrate parameters.
 
-<img width="664" alt="TCP" src="https://user-images.githubusercontent.com/48679574/204338150-34151466-100f-40da-9301-4bde6fe908a9.png">
+<img width="500" alt="TCP" src="https://github.com/madara-tribe/HW-Jetson-CSICAM-PX1.1/assets/48679574/5f8230ba-60d4-42f7-bcd5-88365200ac23">
+
 
 # How to use (onlt on jetson)
 
