@@ -1,6 +1,6 @@
 # Dual cameras for CSI camera on Jetson (Stereo Visison)
 
-## item name :waveshare IMX219-83
+## item name 「waveshare IMX219-83」
 
 
 
