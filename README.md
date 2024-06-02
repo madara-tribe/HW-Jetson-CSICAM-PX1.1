@@ -35,7 +35,8 @@ $ python3 main.py --dual --plot
 $ python3 main.py --dual --mov
 ```
 
-
+# other branch(PX1.0)
+- [Send image with TCP](https://github.com/madara-tribe/HW-Jetson-CSICAM-PX1.1/tree/csitcp)
 
 
 # References
